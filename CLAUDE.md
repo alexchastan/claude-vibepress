@@ -2,62 +2,64 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Ce qu'est ce repo
+> Authoring language: all repository files (manifests, skills, plugins, docs) are written in **English**, regardless of the language used to converse with the user. Skill/plugin instructions are more reliable in English.
 
-VibePress est une **marketplace de plugins Claude Code** (pas une application). Son but : outiller le « vibecoding » de sites WordPress — scaffolding d'environnement local, thèmes par blocs, blocs Gutenberg, contenu/SEO. Le repo ne se build pas et n'a pas de tests : sa « source » est un ensemble de manifests JSON et de composants de plugins (commandes, agents, skills, hooks, serveurs MCP) que Claude Code découvre et charge.
+## What this repo is
 
-Auteur/owner : Alexandre Chastan. La marketplace s'appelle `vibepress` (le nom utilisé lors de l'installation).
+VibePress is a **Claude Code plugin marketplace** (not an application). Its purpose: tooling to "vibecode" WordPress sites — local environment scaffolding, block themes, Gutenberg blocks, content/SEO. There is nothing to build and no test suite: the repo's "source" is a set of JSON manifests and plugin components (commands, agents, skills, hooks, MCP servers) that Claude Code discovers and loads.
+
+Owner: Alexandre Chastan. The marketplace is named `vibepress` (the name used when installing).
 
 ## Architecture
 
-Deux niveaux de manifest, un seul point d'entrée :
+Two manifest levels, one entry point:
 
-- `.claude-plugin/marketplace.json` — **le manifest de la marketplace**, à la racine du repo. Il déclare `name`, `owner`, `metadata.pluginRoot` (`./plugins`) et le tableau `plugins`. Chaque entrée de `plugins` référence un plugin par un `source` relatif (`"./plugins/<nom>"`) plus des métadonnées.
-- `plugins/<nom>/.claude-plugin/plugin.json` — **le manifest de chaque plugin**. `name` est le seul champ requis. En mode strict (défaut), ce fichier fait autorité sur ce que déclare l'entrée marketplace.
+- `.claude-plugin/marketplace.json` — **the marketplace manifest**, at the repo root. Declares `name`, `owner`, `metadata.pluginRoot` (`./plugins`), and the `plugins` array. Each `plugins` entry references a plugin by a relative `source` (`"./plugins/<name>"`) plus metadata.
+- `plugins/<name>/.claude-plugin/plugin.json` — **each plugin's manifest**. `name` is the only required field. In strict mode (default), this file is authoritative over what the marketplace entry declares.
 
-État actuel : `plugins: []`. La structure est prête mais aucun plugin n'est encore défini — c'est intentionnel.
+Current state: `plugins: []`. The structure is ready but no plugin is defined yet — this is intentional.
 
-### Règle de layout à ne pas confondre
+### Layout rule not to confuse
 
-Dans un plugin, **seul `plugin.json` vit dans `.claude-plugin/`**. Tous les autres composants sont à la racine du plugin, pas dans `.claude-plugin/` :
+Inside a plugin, **only `plugin.json` lives in `.claude-plugin/`**. Every other component sits at the plugin root, not in `.claude-plugin/`:
 
 ```
-plugins/<nom>/
+plugins/<name>/
 ├── .claude-plugin/
-│   └── plugin.json          # manifest (seul fichier dans ce dossier)
-├── commands/                # commandes slash (*.md)
+│   └── plugin.json          # manifest (only file in this folder)
+├── commands/                # slash commands (*.md)
 ├── agents/                  # subagents (*.md)
-├── skills/<skill>/SKILL.md  # skills (auto-découverts ; s'AJOUTENT au scan par défaut)
+├── skills/<skill>/SKILL.md  # skills (auto-discovered; ADD to the default scan)
 ├── hooks/hooks.json         # hooks
-└── .mcp.json                # serveurs MCP
+└── .mcp.json                # MCP servers
 ```
 
-Précédence des chemins déclarés dans `plugin.json` : `commands`/`agents`/`outputStyles` **remplacent** le dossier par défaut ; `skills` **s'ajoute** au scan `skills/`. Dans toute config de composant, utiliser les variables `${CLAUDE_PLUGIN_ROOT}`, `${CLAUDE_PROJECT_DIR}` plutôt que des chemins en dur.
+Path precedence for fields declared in `plugin.json`: `commands`/`agents`/`outputStyles` **replace** the default folder; `skills` **adds** to the `skills/` scan. In any component config, use the `${CLAUDE_PLUGIN_ROOT}`, `${CLAUDE_PROJECT_DIR}` variables rather than hard-coded paths.
 
-## Ajouter un plugin
+## Adding a plugin
 
-1. Créer `plugins/<nom>/.claude-plugin/plugin.json` (`name` en kebab-case, au minimum).
-2. Ajouter ses composants à la racine du plugin (`commands/`, `agents/`, `skills/`…).
-3. Ajouter une entrée dans `plugins` de `marketplace.json` :
+1. Create `plugins/<name>/.claude-plugin/plugin.json` (kebab-case `name`, at minimum).
+2. Add its components at the plugin root (`commands/`, `agents/`, `skills/`…).
+3. Add an entry to `plugins` in `marketplace.json`:
    ```json
-   { "name": "<nom>", "source": "./plugins/<nom>", "description": "…", "version": "0.1.0" }
+   { "name": "<name>", "source": "./plugins/<name>", "description": "…", "version": "0.1.0" }
    ```
-4. `name` doit être identique dans les deux manifests et en **kebab-case** (minuscules, tirets, pas d'espaces ni underscores).
+4. `name` must match in both manifests and be **kebab-case** (lowercase, hyphens, no spaces or underscores).
 
-## Tester localement
+## Testing locally
 
-La marketplace s'installe depuis un chemin local, sans passer par GitHub :
+The marketplace installs from a local path, without going through GitHub:
 
 ```
-/plugin marketplace add ./            # enregistre cette marketplace depuis le repo local
-/plugin install <nom>@vibepress       # installe un plugin de la marketplace
-/plugin marketplace update vibepress  # recharge après modification d'un manifest
+/plugin marketplace add ./            # register this marketplace from the local repo
+/plugin install <name>@vibepress      # install a plugin from the marketplace
+/plugin marketplace update vibepress  # reload after editing a manifest
 ```
 
-Depuis GitHub, les utilisateurs feront : `/plugin marketplace add alexchastan/claude-vibepress`.
+From GitHub, users will run: `/plugin marketplace add alexchastan/claude-vibepress`.
 
 ## Conventions
 
-- Tous les `name` (marketplace et plugins) : **kebab-case**.
-- Versions en **semver** ; on peut omettre `version` pour un versioning par SHA de commit.
-- Le manifest doit rester du JSON valide — c'est le seul artefact qui casse tout s'il est mal formé.
+- All `name` values (marketplace and plugins): **kebab-case**.
+- Versions in **semver**; `version` may be omitted for commit-SHA versioning.
+- The manifest must stay valid JSON — it is the one artifact that breaks everything if malformed.

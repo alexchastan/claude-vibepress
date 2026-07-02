@@ -1,17 +1,17 @@
 # VibePress
 
-Marketplace de plugins [Claude Code](https://claude.com/claude-code) pour **vibecoder des sites WordPress** : scaffolding d'environnement local, thèmes par blocs, blocs Gutenberg, contenu et SEO.
+A [Claude Code](https://claude.com/claude-code) plugin marketplace for **vibecoding WordPress sites**: local environment scaffolding, block themes, Gutenberg blocks, content, and SEO.
 
-> État : amorçage. La marketplace est en place, les plugins arrivent.
+> Status: bootstrapping. The marketplace is in place; plugins are on the way.
 
-## Installation
+## Install
 
 ```
 /plugin marketplace add alexchastan/claude-vibepress
-/plugin install <nom-du-plugin>@vibepress
+/plugin install <plugin-name>@vibepress
 ```
 
-En local, depuis un clone du repo :
+Locally, from a clone of the repo:
 
 ```
 /plugin marketplace add ./
@@ -19,8 +19,8 @@ En local, depuis un clone du repo :
 
 ## Plugins
 
-_Aucun plugin publié pour l'instant._ Voir [`CLAUDE.md`](./CLAUDE.md) pour la structure et la marche à suivre pour en ajouter.
+_No plugin published yet._ See [`CLAUDE.md`](./CLAUDE.md) for the structure and how to add one.
 
-## Auteur
+## Author
 
 Alexandre Chastan

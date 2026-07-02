@@ -1,11 +1,11 @@
-# OS / éditeurs
+# OS / editors
 .DS_Store
 Thumbs.db
 *.swp
 .idea/
 .vscode/
 
-# Node (si des plugins ajoutent des builds JS plus tard)
+# Node (in case plugins add JS builds later)
 node_modules/
 npm-debug.log*
 *.tgz
