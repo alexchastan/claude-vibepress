@@ -1,0 +1,13 @@
+{
+  "name": "vibepress",
+  "description": "Plugins Claude Code pour vibecoder des sites WordPress — du scaffolding local aux thèmes, blocs et contenu.",
+  "version": "0.1.0",
+  "owner": {
+    "name": "Alexandre Chastan",
+    "email": "alex@mkey.fr"
+  },
+  "metadata": {
+    "pluginRoot": "./plugins"
+  },
+  "plugins": []
+}

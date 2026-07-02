@@ -1,0 +1,16 @@
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Node (si des plugins ajoutent des builds JS plus tard)
+node_modules/
+npm-debug.log*
+*.tgz
+
+# Local / secrets
+.env
+.env.*
+*.local
