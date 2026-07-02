@@ -19,7 +19,9 @@ Locally, from a clone of the repo:
 
 ## Plugins
 
-_No plugin published yet._ See [`CLAUDE.md`](./CLAUDE.md) for the structure and how to add one.
+- **[`wp-toolkit`](./plugins/wp-toolkit)** — global, install-agnostic WordPress tools. Provides `/wp-analyze`, a read-only site analysis (core version, PHP, plugins, themes, environment).
+
+See [`CLAUDE.md`](./CLAUDE.md) for the structure and how to add a plugin.
 
 ## Author
 

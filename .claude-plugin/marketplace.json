@@ -9,5 +9,12 @@
   "metadata": {
     "pluginRoot": "./plugins"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "wp-toolkit",
+      "source": "./plugins/wp-toolkit",
+      "description": "Global WordPress commands and skills (site analysis, …).",
+      "version": "0.1.0"
+    }
+  ]
 }

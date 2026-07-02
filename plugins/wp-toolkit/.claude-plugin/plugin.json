@@ -1,0 +1,7 @@
+{
+  "name": "wp-toolkit",
+  "description": "Global, install-agnostic commands and skills for working with any WordPress site.",
+  "version": "0.1.0",
+  "author": { "name": "Alexandre Chastan", "email": "alex@mkey.fr" },
+  "keywords": ["wordpress", "wp-cli", "analysis", "audit"]
+}
