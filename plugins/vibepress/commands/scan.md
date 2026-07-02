@@ -105,5 +105,9 @@ Reply **in the user's language** (see Rules; the examples below are written in E
 them). One line, e.g.: `Updated CLAUDE.md — WP 6.5.2, PHP 8.4, 3 active plugins.` (mention "via
 filesystem (WP-CLI unavailable)" if the fallback was used). Do not re-print the block.
 
-Then, **only if the install is fresh**, add exactly one suggestion line:
-`Fresh install detected → recommended next step: scaffold a custom theme (dedicated command coming next).`
+Then, **only if the install is fresh**, do **not** stop at a suggestion — **chain into theme
+creation**: emit one transition line in the user's language (e.g. `Fresh install — let's set up your
+theme.`), then read `${CLAUDE_PLUGIN_ROOT}/commands/theme-create.md` and follow it, reusing the WP root
+and language already detected (skip its Step 0 re-detection). Its own recap and activation
+confirmation still gate every change. Fallback: if that file cannot be read, print the single line
+`Fresh install detected → recommended next step: run /vibepress:theme-create.`

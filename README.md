@@ -19,7 +19,9 @@ Locally, from a clone of the repo:
 
 ## Plugins
 
-- **[`vibepress`](./plugins/vibepress)** — the flagship plugin. Provides `/vibepress:scan`, a read-only WordPress scan that writes a concise `CLAUDE.md` (core version, PHP, environment, active theme & plugins) and suggests a theme on fresh installs.
+- **[`vibepress`](./plugins/vibepress)** — the flagship plugin.
+  - `/vibepress:scan` — read-only scan that writes a concise `CLAUDE.md` (core version, PHP, environment, active theme & plugins); on a fresh install it chains into theme creation.
+  - `/vibepress:theme-create` — guided theme scaffolding (Block/FSE, ACF Pro, child, classic PHP) with design tokens, a theme-level `CLAUDE.md` + `DESIGN.md`, and activation.
 
 See [`CLAUDE.md`](./CLAUDE.md) for the structure and how to add a plugin.
 

@@ -13,8 +13,8 @@
     {
       "name": "vibepress",
       "source": "./plugins/vibepress",
-      "description": "Flagship plugin — scan and vibecode any WordPress site.",
-      "version": "0.2.0"
+      "description": "Flagship plugin — scan an install and scaffold themes to vibecode any WordPress site.",
+      "version": "0.3.0"
     }
   ]
 }
