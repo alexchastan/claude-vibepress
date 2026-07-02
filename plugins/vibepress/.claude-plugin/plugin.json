@@ -1,0 +1,7 @@
+{
+  "name": "vibepress",
+  "description": "The flagship VibePress plugin: install-agnostic commands to scan and vibecode any WordPress site.",
+  "version": "0.2.0",
+  "author": { "name": "Alexandre Chastan", "email": "alex@mkey.fr" },
+  "keywords": ["wordpress", "wp-cli", "scan", "claude-md"]
+}

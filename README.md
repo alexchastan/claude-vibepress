@@ -19,7 +19,7 @@ Locally, from a clone of the repo:
 
 ## Plugins
 
-- **[`wp-toolkit`](./plugins/wp-toolkit)** — global, install-agnostic WordPress tools. Provides `/wp-analyze`, a read-only site analysis (core version, PHP, plugins, themes, environment).
+- **[`vibepress`](./plugins/vibepress)** — the flagship plugin. Provides `/vibepress:scan`, a read-only WordPress scan that writes a concise `CLAUDE.md` (core version, PHP, environment, active theme & plugins) and suggests a theme on fresh installs.
 
 See [`CLAUDE.md`](./CLAUDE.md) for the structure and how to add a plugin.
 
