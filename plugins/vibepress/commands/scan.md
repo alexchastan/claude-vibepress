@@ -20,6 +20,10 @@ so **keep it minimal** — essentials only, no walls of text.
   `wp-config.php`. Report *presence* and flags only, never values.
 - **Terse.** The `CLAUDE.md` block is ~5–7 lines. The chat reply is one line (plus at most one
   suggestion line). Do not re-print the block in chat.
+- **Speak the user's language.** Write the chat reply and the suggestion line in the language the
+  user is conversing in. Keep your reasoning and the `CLAUDE.md` block itself in English. If the
+  conversation gives no language signal (e.g. this command was run with no other message), fall back
+  to the site locale detected in Step 3/4 (e.g. `fr_FR` → French), and to English if still unknown.
 - **Don't assume WordPress.** If no install is found, say so and stop.
 
 ## Step 1 — Locate the WordPress root
@@ -46,6 +50,7 @@ Collect only what the block needs (all read-only, each with `--path="$WP_ROOT"`)
   `wp plugin list --format=count` for the total (inactive = total − active)
 - `wp eval 'echo PHP_VERSION;'` (server PHP)
 - `wp option get home`, `wp option get blog_public` (0 = hidden from search engines)
+- `wp eval 'echo get_locale();'` → site locale (used only to pick the reply language as a fallback)
 - `wp config get table_prefix`; and, if defined, `WP_DEBUG` / `WP_ENVIRONMENT_TYPE`
 - `wp post list --post_type=post --post_status=publish,draft --format=count` (for fresh detection)
 
@@ -60,6 +65,8 @@ When WP-CLI is unavailable/non-functional (active state is unknowable without th
   theme unknown.
 - **PHP:** `php -v` (CLI PHP — may differ from the server's PHP; flag it).
 - **wp-config.php:** table prefix, `WP_DEBUG`, `WP_ENVIRONMENT_TYPE` — flags/presence only, no values.
+- **Locale (for reply language only):** a `WPLANG` constant in `wp-config.php`, else a directory under
+  `wp-content/languages/` (e.g. `fr_FR`); unknown ⇒ English.
 
 ## Step 5 — Detect a fresh install
 
@@ -94,8 +101,9 @@ Idempotent write:
 
 ## Step 7 — Reply
 
-One line, e.g.: `Updated CLAUDE.md — WP 6.5.2, PHP 8.4, 3 active plugins.` (mention "via filesystem
-(WP-CLI unavailable)" if the fallback was used). Do not re-print the block.
+Reply **in the user's language** (see Rules; the examples below are written in English — translate
+them). One line, e.g.: `Updated CLAUDE.md — WP 6.5.2, PHP 8.4, 3 active plugins.` (mention "via
+filesystem (WP-CLI unavailable)" if the fallback was used). Do not re-print the block.
 
 Then, **only if the install is fresh**, add exactly one suggestion line:
 `Fresh install detected → recommended next step: scaffold a custom theme (dedicated command coming next).`

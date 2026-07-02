@@ -63,3 +63,7 @@ From GitHub, users will run: `/plugin marketplace add alexchastan/claude-vibepre
 - All `name` values (marketplace and plugins): **kebab-case**.
 - Versions in **semver**; `version` may be omitted for commit-SHA versioning.
 - The manifest must stay valid JSON — it is the one artifact that breaks everything if malformed.
+- **Command language:** command files, reasoning, and generated artifacts (e.g. `CLAUDE.md` blocks)
+  are authored in **English**; but a command's **user-facing chat output** should be in the user's
+  language. When a command is invoked with no conversational language signal, fall back to a
+  domain signal (e.g. the WordPress site locale) and then to English.
